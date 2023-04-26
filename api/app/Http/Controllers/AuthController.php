@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\UserRole;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Resources\AuthCollection;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,17 +25,19 @@ class AuthController extends Controller
             ]);
 
             return response()->json([
-                'status' => true,
-                'message' => 'User Created Successfully.',
+                'success' => true,
+                'message' => 'Successfully Registered',
                 'data' => [
-                    'token_type' => 'Bearer',
-                    'access_token' => $user->createToken("API_TOKEN")->plainTextToken
+                    'user' => new AuthCollection($user),
+                    'token' => [
+                        'type' => 'Bearer',
+                        'access' => $user->createToken("API_TOKEN")->plainTextToken
+                    ]
                 ]
             ]);
-
         }catch (\Throwable $th){
             return response()->json([
-                'status' => false,
+                'success' => false,
                 'message' => $th->getMessage()
             ], 500);
         }
@@ -42,38 +45,50 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request):JsonResponse{
         try {
-
             if(!Auth::attempt($request->only(['user_name', 'password']))){
                 return response()->json([
-                    'status' => false,
-                    'message' => 'Username & Password Does Not Match With Our Record.',
+                    'success' => false,
+                    'message' => 'Username & Password Does Not Match With Our Record',
                 ], 401);
             }
 
             $user = User::where('user_name', $request->user_name)->first();
 
             return response()->json([
-                'status' => true,
-                'message' => 'User Logged In Successfully',
+                'success' => true,
+                'message' => 'Successfully Logged In',
                 'data' => [
-                    'token_type' => 'Bearer',
-                    'access_token' => $user->createToken("API_TOKEN")->plainTextToken
+                    'user' => new AuthCollection($user),
+                    'token' => [
+                        'type' => 'Bearer',
+                        'access' => $user->createToken("API_TOKEN")->plainTextToken
+                    ]
                 ]
             ]);
 
         } catch (\Throwable $th) {
             return response()->json([
-                'status' => false,
+                'success' => false,
                 'message' => $th->getMessage()
             ], 500);
         }
     }
 
     public function logout(Request $request):JsonResponse{
-        auth()->user()->tokens()->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'User Logged Out.',
-        ]);
+        try {
+            auth()->user()->tokens()->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'User Has Been Successfully Logout',
+            ]);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+
     }
 }
