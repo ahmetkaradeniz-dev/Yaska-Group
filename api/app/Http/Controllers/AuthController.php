@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserRole;
+use App\Enums\UserStatus;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\AuthCollection;
@@ -53,6 +54,13 @@ class AuthController extends Controller
             }
 
             $user = User::where('user_name', $request->user_name)->first();
+
+            if($user->status == UserStatus::FORBIDDEN) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Your Account Has Been Banned',
+                ]);
+            }
 
             return response()->json([
                 'success' => true,

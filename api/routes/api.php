@@ -28,15 +28,22 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::post('logout','logout');
     });
 
+    Route::prefix('account')->controller(\App\Http\Controllers\AccountController::class)->group(function (){
+        Route::get('blog','blog');
+    });
+
     Route::prefix('users')->controller(\App\Http\Controllers\UserController::class)->group(function (){
         Route::get('','getAll');
         Route::patch('forbidden/{user}','forbidden');
     });
 
     Route::prefix('blog')->controller(\App\Http\Controllers\BlogController::class)->group(function (){
-        Route::post('create','create');
-        Route::delete('delete','delete');
+        Route::post('','create');
+        Route::get('{blog}','get');
+        Route::delete('{blog}','delete');
         Route::post('like/{blog}','like');
+        Route::post('unlike/{blog}','unLike');
         Route::post('comment/{blog}','comment');
+        Route::get('comments/{blog}','comments');
     });
 });
