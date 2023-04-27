@@ -269,10 +269,10 @@ class BlogController extends Controller
     }
     public function unLike(Blog $blog,BlogUnLikeRequest $request):JsonResponse{
         try {
-            BlogLike::deleted([
+            BlogLike::where([
                 'blog_id' => $blog->id,
                 'user_id' => auth()->user()->id
-            ]);
+            ])->delete();
 
             return response()->json([
                 'success' => true,
