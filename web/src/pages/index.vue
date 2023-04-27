@@ -63,7 +63,7 @@ watchEffect(() => {
                         <nuxt-link v-for="blog in state.blog" :key="blog.id" :to="`blog/${blog.id}`" class="group block">
                             <article class="shadow-lg rounded-lg">
                                 <div class="overflow-hidden relative">
-                                    <img class="group-hover:scale-110 duration-300 object-cover w-full"
+                                    <img class="group-hover:scale-110 duration-300 object-cover w-full h-[300px]"
                                         :src="blog.image_url || 'https://cdn.shopify.com/s/files/1/0070/7032/files/how-to-start-a-blog-illustration.png?format=jpg&quality=90&v=1595363254'"
                                         :alt="blog.image_url">
                                     <div
