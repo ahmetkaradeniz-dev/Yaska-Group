@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    .btn {
+        @apply inline-block cursor-pointer text-center bg-darkBlue min-w-[150px] text-white mx-auto px-3 py-1.5 rounded-full;
+      }
+      .section-padding{
+        @apply py-10 ;
+      }
+}
