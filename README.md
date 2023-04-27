@@ -21,11 +21,13 @@ Vue.js 3 Composition API ve TypeScript kullanılarak oluşturulmuştur. Kullanı
 
 <hr>
 
-### Web
+### WEB
 
 Uygulamaya gitmek için [buraya tıklayın](https://yaska-group-interview-task.ahmetkaradeniz.dev).
 
 Nuxt.js 3 Composition API ve TypeScript kullanılarak oluşturulmuştur. Kullanıcı arayüzü tasarımı için Tailwind CSS kitinden yararlanılmıştır.
+
+<hr>
 
 # Proje Adı
 
