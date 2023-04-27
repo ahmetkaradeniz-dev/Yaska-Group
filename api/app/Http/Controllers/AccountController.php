@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\UserStatus;
 use App\Http\Resources\AllBlogCollection;
 use App\Models\Blog;
-use Illuminate\Database\Query\JoinClause;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 
 class AccountController extends Controller
 {
-    public function blog(Request $request){
+    public function blog(Request $request) : JsonResponse{
         try{
             $query = Blog::withCount(['likes','comments'])
                 ->where('user_id','=',auth()->user()->id)

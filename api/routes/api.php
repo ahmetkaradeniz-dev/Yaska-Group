@@ -35,15 +35,23 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::prefix('users')->controller(\App\Http\Controllers\UserController::class)->group(function (){
         Route::get('','getAll');
         Route::patch('forbidden/{user}','forbidden');
+        Route::patch('recover/{user}','recover');
     });
 
     Route::prefix('blog')->controller(\App\Http\Controllers\BlogController::class)->group(function (){
+        Route::get('getAllByAdmin','getAllByAdmin');
+        Route::get('getByAdmin/{blog}','getByAdmin');
         Route::post('','create');
         Route::get('{blog}','get');
+        Route::post('update/{blog}','update');
         Route::delete('{blog}','delete');
         Route::post('like/{blog}','like');
         Route::post('unlike/{blog}','unLike');
         Route::post('comment/{blog}','comment');
         Route::get('comments/{blog}','comments');
+        Route::get('comment/getAllByAdmin','getAllCommentByAdmin');
+        Route::get('comment/getByAdmin/{blog_comment}','getCommentByAdmin');
+        Route::put('comment/updateByAdmin/{blog_comment}','updateCommentByAdmin');
+        Route::delete('comment/deleteByAdmin/{blog_comment}','deleteCommentByAdmin');
     });
 });

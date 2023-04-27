@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Blog;
+namespace App\Http\Requests\User;
 
+use App\Enums\UserRole;
 use Illuminate\Foundation\Http\FormRequest;
 
-class BlogUpdateRequest extends FormRequest
+class UserRecover extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return auth()->check();
+        return auth()->user()->role == UserRole::ADMIN;
     }
 
     /**
@@ -22,11 +23,7 @@ class BlogUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
-            'content' => 'required',
-            'file' => '',
-            'published_date' => '',
-            'status' => 'required'
+            //
         ];
     }
 }
