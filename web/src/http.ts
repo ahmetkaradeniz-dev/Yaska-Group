@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
 import { useAuthStore } from './stores/auth'
 
-const apiUrl: string = 'https://yaska-group-interview-task-api.ahmetkaradeniz.dev'
+const apiUrl: string = 'http://127.0.0.1:8000/api/'
 
 const axiosIns: AxiosInstance = axios.create({
     baseURL: apiUrl
