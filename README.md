@@ -4,6 +4,8 @@
 
 Docker üzerinde sanallaştırılmış konteynerlar üzerinden yayınlanmıştır.
 
+<hr>
+
 ### API
 
 Uygulamaya gitmek için [buraya tıklayın](https://yaska-group-interview-task-api.ahmetkaradeniz.dev).
