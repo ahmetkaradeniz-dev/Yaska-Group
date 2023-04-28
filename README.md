@@ -1,5 +1,9 @@
 # Genel Bilgilendirme
 
+### Server
+
+Docker üzerinde sanallaştırılmış konteynerlar üzerinden yayınlanmıştır.
+
 ### API
 
 Uygulamaya gitmek için [buraya tıklayın](https://yaska-group-interview-task-api.ahmetkaradeniz.dev).
